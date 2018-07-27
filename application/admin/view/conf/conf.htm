@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>ThinkPHP5.0</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+</head>
+<body>
+	<!-- 头部 -->
+	{include file="public/top" /}
+	<!-- /头部 -->
+
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="public/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <i class="fa fa-home"></i>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li class="active">配置管理</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+
+<button type="button" tooltip="添加配置" class="btn btn-sm btn-azure btn-addon">网站配置
+</button>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                <div class="flip-scroll">
+                    <form action="" method="post">
+                        <table class="table table-bordered table-hover">
+                            <thead class="">
+                                <tr>
+                                    <th class="text-right" width="10%">配置名称</th>
+                                    <th class="text-left">配置值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">公司名称</td>
+                                     <td align="left">
+                                         <input name="cp_name"  id="cp_name" type="text" class="form-control" style="width:420px;" value="{$confres.cp_name}">
+                                         
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">创始人</td>
+                                     <td align="left">
+                                         <input name="cp_founder"  id="cp_founder" type="text" class="form-control" style="width:320px;" value="{$confres.cp_founder}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">联合创始人</td>
+                                     <td align="left">
+                                         <input name="cp_alliance"  id="cp_alliance" type="text" class="form-control" style="width:220px;" value="{$confres.cp_alliance}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">董事长</td>
+                                     <td align="left">
+                                         <input name="cp_Chairman"  id="cp_Chairman" type="text" class="form-control" style="width:520px;" value="{$confres.cp_Chairman}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">总经理</td>
+                                     <td align="left" style="padding-right:0">
+                                         <input name="cp_manager"  id="cp_manager" type="text" class="form-control" style="width:420px;display:inline-block" value="{$confres.cp_manager}">
+                                     	 <div style="color:green;margin:5px;display:inline-block;"><span>如有多人,请用逗号分隔</span></div>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">LOGO</td>
+                                     <td align="left">
+                                         <input type="button" value="上传logo" style="margin-right:40px;" class="btn btn-darkorange shiny"
+			                                 onclick="GetUploadify(1,'original_img','conf_logo','call_back_2');"/>
+                                        	<input type="text" class="input-sm original_img"  name="cp_logo"  style="display:none;"
+                                        	id="original_picture" value="{$confres.cp_logo}" onchange="changesrc(this.value)" />
+										{if condition="$confres['cp_logo'] neq null"}
+	             							<a target='_blank' href='{$confres.cp_logo}' id='original_picture2'>
+	                                        <img width='100'  class='img_picture'  src='{$confres.cp_logo}'
+	                                        onmouseover="getbimg(this)" onmouseout="layer.closeAll();" ></a>
+	                                    {else /}
+	                                    <span class="span_picture">暂无图片！</span><a target='_blank' href='$ad' id='original_img2'>
+                                        <img width='25'  class='img_picture'  src='$ad' style="display:none;"></a>
+										{/if}
+                                        <span id="err_original_img" style="color:#F00; display:none;"></span>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">电话</td>
+                                     <td align="left">
+                                         <input name="cp_phone" id="cp_phone" type="text" class="form-control" style="width:320px;" value="{$confres.cp_phone}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">邮箱</td>
+                                     <td align="left">
+                                         <input name="cp_mail" id="cp_mail" type="text" class="form-control" style="width:520px;" value="{$confres.cp_mail}">
+                                     </td>
+                                 </tr>
+                                 
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">备案号</td>
+                                     <td align="left">
+                                         <input name="cp_icp" type="text" class="form-control" style="width:420px;" value="{$confres.cp_icp}">
+                                     </td>
+                                 </tr>
+                                  <tr>
+                                     <td align="right" style="vertical-align:middle;">地址</td>
+                                     <td align="left">
+                                         <input name="cp_address" id="cp_address" type="text" class="form-control" style="width:620px;display:inline-block" value="{$confres.cp_address}">
+                                    	 <div style="color:green;margin:5px;display:inline-block;"><span>如有多个地址,请用逗号分隔</span></div>
+                                     </td>
+                                     
+                                 </tr>
+                                 <tr>
+                                     <td align="right">公司地址</td>
+                                     <td align="left">
+                                         <div class="map-conf" id="map-conf" style="height:350px;width:520px;border:1px solid grey;"></div>
+			                                <input type="hidden"  value="{$confres.cp_point}" size="85" name="cp_point" id="cp_point" >
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">首页banner简介</td>
+                                     <td align="left">
+                                     	<textarea rows="4" name="cp_banner_desc" class="form-control" id="cp_banner_desc" style="width:450px;">{$confres.cp_banner_desc}</textarea>
+                                     </td>
+                                 </tr>
+                                  <tr>
+                                     <td align="right" style="vertical-align:middle;">首页公司简介</td>
+                                     <td align="left">
+                                     	<textarea rows="5" name="cp_desc" class="form-control" id="cp_desc" style="width:620px;">{$confres.cp_desc}</textarea>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">地图</td>
+                                     <td align="left">
+                                        <input type="button" value="上传图片"  style="margin-right:40px;" class="btn btn-danger shiny"
+										 	onclick="GetUploadify(1,'original_img','conf_map','call_back_img');"/>
+                                       	<input type="hidden" class="input-sm original_img"
+                                       		name="cp_map" id="original_img" value="{$confres.cp_map}" onchange="changesrc(this.value)" />
+  										{if condition="$confres['cp_map'] neq null"}
+             							<a target='_blank' href='{$confres.cp_map}' id='original_img2'>
+                                        <img width='100'  class='img_thb'  src='{$confres.cp_map}' ></a>
+	                                    {else /}
+	                                    <span class="span_thb">暂无图片！</span><a target='_blank' href='$ad' id='original_img2'>
+                                        <img width='25'  class='img_thb' height='25' src='$ad' style="display:none;"></a>
+										{/if}
+										 <span id="err_original_img" style="color:#F00; display:none;"></span>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">二维码</td>
+                                     <td align="left">
+                                        <input type="button" value="传二维码" style="margin-right:40px;" class="btn btn-blue shiny"
+			                                 onclick="GetUploadify(1,'original_img','conf_qrcode','call_back_qrcode');"/>
+                                        	<input type="text" class="input-sm original_img"  name="cp_qrcode"  style="display:none;"
+                                        	id="original_qrcode" value="{$confres.cp_qrcode}" onchange="changesrc(this.value)" />
+										{if condition="$confres['cp_qrcode'] neq null"}
+	             							<a target='_blank' href='{$confres.cp_qrcode}' id='original_qrcode2'>
+	                                        <img width='100'  class='img_qrcode'  src='{$confres.cp_qrcode}'></a>
+	                                    {else /}
+	                                    <span class="span_qrcode">暂无图片！</span><a target='_blank' href='$ad' id='original_img2'>
+                                        <img width='25'  class='img_qrcode' height='25' src='$ad' style="display:none;"></a>
+										{/if}
+                                        <span id="err_original_img" style="color:#F00; display:none;"></span>
+                                     </td>
+                                 </tr>
+                                 
+                                 
+                                
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">公司详情</td>
+                                     <td align="left">
+                                     	
+                                     	<textarea id="content" name="cp_content">{$confres.cp_content}</textarea>
+                                     </td>
+                                 </tr>
+                            </tbody>
+                        </table>
+                        <div  align="left"><input class="btn btn-primary btn-sm shiny" style="margin-left:20%; margin-top:10px;" type="submit" value="提交修改" ></div>
+                    </form>
+                </div>
+                <div>
+                	                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>
+	</div>
+
+	    <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+    <script src="__ADMIN__/style/avatar/global.js" type="text/javascript"></script>
+    <script src="__ADMIN__/ueditor/ueditor.config.js"></script>
+    <script src="__ADMIN__/ueditor/ueditor.all.min.js"></script>
+     <script type="text/javascript">
+	    UE.getEditor('content',{initialFrameWidth:720,initialFrameHeight:400,});
+    </script>
+     <!-- baidu -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=NOraeOytceNxSBgQ7pY9qbrl"></script>
+     <script type="text/javascript">
+	var point_cng = $("#cp_point").val();
+	var address_cng = $("#cp_address").val();
+	address_cng += "<br/>联系电话: "+$("#cp_phone").val();
+	var name_cng = $("#cp_name").val();
+	var newLoc=point_cng.split(",");
+	console.log(name_cng);
+    var map = new BMap.Map("map-conf");
+    map.centerAndZoom(new BMap.Point(parseFloat(newLoc[0]),parseFloat(newLoc[1])), 13);
+    //map.panBy(250,135);//因为嵌套在表格里面，所以会有偏移，可以手动调整回来(根据地图div的width和height来设定数值)
+
+    //0.控件设置
+    //平移缩放
+    map.addControl(new BMap.NavigationControl());
+    //鼠标滚轮放大缩小
+    map.enableScrollWheelZoom();
+    //...
+
+
+
+
+    //1.添加点击侦听
+    map.addEventListener("click", function (e) {
+    	/* var point = $("#info_point").val();
+    	alert(point); */
+    	map.clearOverlays();
+    	var point_x = e.point.lng;
+    	var point_y = e.point.lat;
+
+    	var _p = new BMap.Point(point_x,point_y);
+    	var _m1 = new BMap.Marker(_p);
+    	map.addOverlay(_m1);
+    	_m1.setAnimation(BMAP_ANIMATION_BOUNCE);
+
+    	$("#cp_point").val(point_x+ "," +point_y);
+        });
+
+    //2. 添加静态标识
+    //var point_cng = $("#info_point").val();
+
+
+    var _p = new BMap.Point(parseFloat(newLoc[0]),parseFloat(newLoc[1]));
+    var _m1 = new BMap.Marker(_p);
+    map.addOverlay(_m1);
+
+    //3. 动画
+    _m1.setAnimation(BMAP_ANIMATION_BOUNCE);
+
+    //4.弹出窗口
+    var _info1 = new BMap.InfoWindow(address_cng);
+    _m1.addEventListener("mouseover", function () { this.openInfoWindow(_info1); });
+    _m1.addEventListener("mouseout", function () { this.closeInfoWindow(_info1); });
+
+    //5. 标签提示
+    /* var _opts = { position: _p, offset: new BMap.Size(25, -10) }
+    var _lab = new BMap.Label(name_cng, _opts);
+    if(name_cng){
+    	map.addOverlay(_lab);
+        _lab.setStyle({ color: "black", fontSize: "14px", padding: "6px" });
+    } */
+
+
+
+
+
+
+
+</script>
+<script type="text/javascript">
+ 					function call_back_img(fileurl_tmp){
+
+		   		        $("#original_img").val(fileurl_tmp);
+		   		    	$("#original_img2").attr('href', fileurl_tmp);
+		   		    	 $(".img_thb").attr('src', fileurl_tmp);
+		   		    	$(".img_thb").attr('style', "display:inline;");
+		   		    	$(".span_thb").attr('style', "display:none;");		   		    	
+		   		    	$(".span_qrcode").attr('style', "display:none;");
+		   		    }
+ 					function call_back_2(fileurl_tmp){
+		   		    	fileurl_tmp=fileurl_tmp.replace('\\','/');
+		   		        $("#original_picture").val(fileurl_tmp);
+		   		    	$("#original_picture2").attr('href', fileurl_tmp);
+		   		    	$(".img_picture").attr('src', fileurl_tmp);
+		   		    	$(".img_picture").attr('style', "display:inline;");
+		   		    	$(".span_picture").attr('style', "display:none;");
+		   		    	
+		   		    }
+		   			function call_back_qrcode(fileurl_tmp){
+		   		    	fileurl_tmp=fileurl_tmp.replace('\\','/');
+		   		        $("#original_qrcode").val(fileurl_tmp);
+		   		    	$("#original_qrcode2").attr('href', fileurl_tmp);
+		   		    	$(".img_qrcode").attr('src', fileurl_tmp);
+		   		    	$(".img_qrcode").attr('style', "display:inline;");
+		   		    	$(".span_qrcode").attr('style', "display:none;");
+		   		    	
+		   		    }
+		  </script>
+
+
+</body></html>

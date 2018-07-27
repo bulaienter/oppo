@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>ThinkPHP5.0</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+
+
+    <!--Beyond styles-->
+
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+    <script src="__ADMIN__/ueditor/ueditor.config.js"></script>
+    <script src="__ADMIN__/ueditor/ueditor.all.min.js"></script>
+    <script src="__ADMIN__/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+    <script src="__ADMIN__/style/avatar/global.js" type="text/javascript"></script>
+
+
+
+</head>
+<body>
+	<!-- 头部 -->
+	{include file="public/top" /}
+	<!-- /头部 -->
+
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="public/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">系统</a>
+                    </li>
+                                        <li>
+                        <a href="{:url('lst')}">审核列表</a>
+                    </li>
+                    <li class="active">表单审核</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+							<div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="well with-header">
+                                        <div class="header bordered-pink">表单详情</div>
+                                        <div class="buttons-preview">
+                                            <div>基本信息</div>
+                                            	<div style="margin:20px 50px;" >
+                                            	<input type="text"   id="o_id"  value="{$article.id}" style="display:none;" >
+												<p>串码：{$article.imei}</p>
+												<p>机型：A15</p>
+												<p>业务员：张三</p>
+												<p>店铺：{$store.sname}</p>												
+												<p>照片</p>
+												  <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
+												    <div class="ds-thread">
+												    	<a target='_blank' href='__IMGURL__{$article.imgurl}' id='original_img2'>
+					                                        <img width='125'  height='125' src='__IMGURL__{$article.imgurl}'>
+					                                    </a>
+												    </div>
+												  </div>											
+                                            <hr class="wide">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="well with-header">
+                                        <div class="header bordered-blue">审核结果</div>
+                                        <div class="buttons-preview">
+                                        <div>修改状态</div>
+	                                        <div style="margin:20px 50px;" >
+											    <!-- <select name="state" id="state">
+	                                            	<option>请选择</option>
+				                                    <option {if condition="$article['state'] eq 1"}selected="selected"{/if} value="1">待审核</option>
+	                                            	<option {if condition="$article['state'] eq 2"}selected="selected"{/if} value="2">通过</option>
+	                                            	<option {if condition="$article['state'] eq 3"}selected="selected"{/if} value="3">未通过</option>
+				                                </select> -->
+				                                <div class="control-group">
+						                            <div class="radio"><label><input {if condition="$article['state'] eq 1"}checked="checked"{/if} value="1" class="colored-warning" name="state"  type="radio"><span class="text"> 待审核</span></label></div>
+						                            <div class="radio"><label><input {if condition="$article['state'] eq 2"}checked="checked"{/if} value="2" class="colored-success" name="state"  type="radio"><span class="text"> 通过</span></label></div>
+						                            <div class="radio"><label><input {if condition="$article['state'] eq 3"}checked="checked"{/if} value="3" class="colored-danger"  name="state"  type="radio"><span class="text"> 不通过</span></label></div>						                            
+						                        </div>
+	                                        </div>
+									    <div>详细信息</div>
+										    <div style="margin:20px 50px;" >
+										    <textarea id="desc" name="desc" rows="4" cols="70">{$article.desc}</textarea>
+	                                        </div>
+                                        </div>
+                                        <div style="margin:20px 50px;" >
+	                                        <button class="btn btn-palegreen" id="bootbox-regular" onclick="confirm_adjust()">确定</button>
+	                                        <button class="btn btn-darkorange" id="bootbox-confirm">返回</button>
+                                    	</div>
+                                    </div>
+                                </div>
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>
+	</div>
+	    <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <script src="__ADMIN__/style/validation/forum_check.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+    <!-- baidu -->
+   
+  <!--Bootstrap Date Range Picker-->
+	<link href="__ADMIN__/style/datetime/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN__/style/datetime/moment.js"></script>
+    <script src="__ADMIN__/style/datetime/daterangepicker.js"></script>
+<!--layer-->
+    <script src="__ADMIN__/plus/layer/layer.js"></script>
+    	  <script type="text/javascript">
+
+    	  	$("#bootbox-confirm").click(function(){
+    		  	history.go(-1);
+			});
+    	  	
+			
+			function confirm_adjust(){
+				//var state_adjust = $('#state').val();
+				var state_adjust = $("input[name='state']:checked").val();
+				var oid = $('#o_id').val();
+				var desc = $('#desc').val();
+				//console.log(state_adjust);
+				//alert(state_adjust);
+				layer.confirm('确定要修改状态吗?', {icon: 3, title:'温馨提示'}, function(index){
+                     layer.close(index);
+			    	 $.ajax({
+		             	type : "POST",
+		             	dataType: "json",
+
+		     			url:"{:url('article/state_edit')}",
+		     			data: {state:state_adjust,id:oid,desc:desc},
+		     			success: function(v){
+		     				
+						  if(v==1){
+							  layer.msg('修改状态成功！',{icon: 1});
+		    				  setTimeout('window.location.href = "{:url('article/lst')}"',1000);
+						  }
+						  else{
+							  layer.msg('修改状态失败！',{icon: 2});
+						  }
+				  }
+	     		});
+		      });
+			}
+
+		  </script>
+
+	</body>
+</html>

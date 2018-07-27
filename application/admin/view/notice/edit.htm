@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>ThinkPHP5.0</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+
+
+    <!--Beyond styles-->
+
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+    <script src="__ADMIN__/ueditor/ueditor.config.js"></script>
+    <script src="__ADMIN__/ueditor/ueditor.all.min.js"></script>
+    <script src="__ADMIN__/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+    <script src="__ADMIN__/style/avatar/global.js" type="text/javascript"></script>
+
+
+
+</head>
+<body>
+	<!-- 头部 -->
+	{include file="public/top" /}
+	<!-- /头部 -->
+
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="public/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li>
+                        <a href="{:url('lst')}">通知管理</a>
+                    </li>
+                                        <li class="active">修改通知信息</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+        	<div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">修改通知信息</span>
+                <input type="text" id="inputid" value="1"  style="display:none;">
+                <input type="text" id="inputid_2" value="" style="display:none;">
+            </div>
+            <form class="form-horizontal" role="form" action="" method="post"  >
+            <div class="widget-body">
+               <div class="widget-main ">
+                   <div class="tabbable">
+                       <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                           <li class="active">
+                               <a data-toggle="tab" href="#home11">
+                                  	通知信息
+                               </a>
+                           </li>                        
+                       </ul>
+                       <div class="tab-content tabs-flat">
+                           <div id="home11" class="tab-pane active">
+                               
+                        	
+
+                        		
+								<div class="form-group">
+		                            <label for="username" class="col-sm-2 control-label no-padding-right">起止时间</label>
+									<div class="col-sm-3">
+										<span class="input-icon icon-right">
+                                           <input class="form-control date-picker" readonly="readonly" id ="publish_time"  type="text" value="{$notice.s_time|date="Y-m-d",###} ~ {$notice.e_time|date="Y-m-d",###}">
+                                           <input class="form-control date-picker" readonly="readonly" id ="publish_stime" name="s_time" type="hidden" data-date-format="dd-mm-yyyy" value="{$notice.s_time|date="Y-m-d",###}">
+                                           <input class="form-control date-picker" readonly="readonly" id ="publish_etime" name="e_time" type="hidden" data-date-format="dd-mm-yyyy" value="{$notice.e_time|date="Y-m-d",###}">
+                                           <i class="fa fa-calendar"></i>
+                                        </span>
+	                               	</div>
+                               </div>
+
+								
+								<div class="form-group">
+		                            
+		                            <label for="username" class="col-sm-2 control-label no-padding-right">相关型号</label>
+		                            <div class="col-lg-5 col-sm-6 col-xs-12">
+                                        <div>
+                                            <div class="bootstrap-tagsinput" class="tags" id="tags" tabindex="1">
+                                            <input type="text"  data-role="tagsinput" placeholder="Add tags"
+                                            style="display:none;" name="type" id="form-field-tags" value="{$notice.type}">
+                                            <input  type="text" style="height:40px;" class="tags_enter" autocomplete="off">
+                                            </div>
+                                        </div>
+                        			</div>
+                        		</div>
+<input type="text" style="display:none;" name="typeid" id="form-field-typeid" value="{$notice.typeid}">
+
+                        		<div class="form-group">
+		                            <label for="username" class="col-sm-2 control-label no-padding-right">标签</label>
+		                            <div class="col-lg-6 col-sm-6 col-xs-12">
+										 <div id="js-tags"  style="width:400px;">                                           
+	                                      	   {volist name="mobiletype" id="mobiletype"}
+	                                             <a  href="javascript:void(0);" class="btn btn-magenta list-tag" data-id="{$mobiletype.id}">{$mobiletype.m_mobile}</a>
+	                                           {/volist}
+                                         </div>
+                        			</div>
+                        		</div>
+<!-- <!-- 上传图片 -->
+                        		<div class="form-group">
+		                            <label for="username" class="col-sm-2 control-label no-padding-right">示例图片</label>
+			                            <div class="col-sm-4">
+			                                <input type="button" value="上传图片"  class="btn btn-palegreen shiny"
+			                                 onclick="GetUploadify(1,'original_img','notice','call_back_img');"/>
+                                        	<input type="hidden" class="input-sm original_img"  name="imgurl" 
+                                        	id="original_img" value="{$notice.imgurl}" onchange="changesrc(this.value)" />
+										{if condition="$notice['imgurl'] neq null"}
+	             							<a target='_blank' href='{$notice.imgurl}' id='original_img2'>
+	                                        <img width='25'  class='img_thb' height='25' src='{$notice.imgurl}'
+	                                        onmouseover="getbimg(this)" onmouseout="layer.closeAll();" ></a>
+	                                    {else /}
+	                                    <span class="span_thb">暂无图片！</span><a target='_blank' href='$ad' id='original_img2'>
+                                        <img width='25'  class='img_thb' height='25' src='$ad' style="display:none;"></a>
+										{/if}
+
+
+
+
+                                        <span id="err_original_img" style="color:#F00; display:none;"></span>
+			                            </div>
+
+                        		</div>
+<!-- <!-- 上传图片 -->
+				
+
+								
+
+
+
+                                <div class="form-group">
+	                                    <label class="col-sm-2 control-label no-padding-right" for="username">是否显示</label>
+	
+	                                    <div class="col-sm-6">
+	                                       <div class="checkbox">
+	                                        	<label>
+	                                                <input class="checkbox-slider toggle colored-darkorange" checked="checked"
+	                                                type="checkbox" name="zhuangtai" value="1" {if condition="$notice['zhuangtai'] eq 1"}checked="checked"{/if}>
+	                                                <span class="text"></span>
+	                                            </label>
+	                                        </div>
+	                                    </div>
+	                               </div>
+                               
+                                <div class="form-group">
+	                            	<label for="username" class="col-sm-2 control-label no-padding-right">详情</label>
+		                            <div class="col-sm-3">
+		                                <textarea rows="5" name="desc" class="form-control" id="desc" style="width:420px;">{$notice.desc}</textarea>
+		                            	<span class="text-danger" style="margin:0 auto">{TYPE}为机型号，{TIME}为截止日期，禁止删除！</span>
+		                            </div>
+                        		</div>
+
+                               
+						
+                        
+                          </div>                           
+                           
+                       </div>
+                   </div>
+               </div>
+
+	       		<div class="form-group">
+	              <div class="col-sm-offset-2 col-sm-10">
+	              	  <input type="hidden" name="id" value="{$notice.id}">
+	                  <button type="submit" class="btn btn-default" onclick="return check_error()">保存信息</button>
+	              </div>
+	            </div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>
+	</div>
+	    <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <script src="__ADMIN__/style/validation/forum_check.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+    <!-- baidu -->
+
+
+     <script type="text/javascript" src="__ADMIN__/style/modernizr.min.js"></script>
+  <!--Bootstrap Date Range Picker-->
+	<link href="__ADMIN__/style/datetime/daterangepicker-bs3.css" rel="stylesheet" type="text/css">
+    <script src="__ADMIN__/style/datetime/moment.js"></script>
+    <script src="__ADMIN__/style/datetime/daterangepicker.js"></script>
+<!--layer-->
+    <script src="__ADMIN__/plus/layer/layer.js"></script>
+
+    
+
+		<script type="text/javascript">
+			function check_error(){
+				blurInputLoginArea($("#title"));
+				
+			  var i = 0;
+		      $(".error").each(function() {
+		          if ($(this).css("display") == 'inline') {
+		              i++;
+		          }
+		      })
+		      if(i==0){ return true;}
+		      else{return false;}
+
+		  }
+		  </script>
+		 
+		<!-- <!--   //日历控件 -->
+	
+		   <script type="text/javascript">
+		   
+		   var beginTimeStore = $('#publish_stime').val()?$('#publish_stime').val():new Date();
+			//alert(beginTimeStore);
+           var endTimeStore = $('#publish_etime').val()?$('#publish_etime').val():new Date();
+	            $('#publish_time').daterangepicker({
+	            	format:"YYYY-MM-DD",
+	            	"startDate":beginTimeStore,
+	            	"endDate":endTimeStore,
+	                "timePicker": true,
+	                "timePicker24Hour": false,
+	                "linkedCalendars": true,
+	                "autoUpdateInput": true,
+	                "locale": {
+	                    applyLabel : '确定',  
+	                    cancelLabel : '取消',  
+	                    fromLabel : '起始时间',  
+	                    toLabel : '结束时间',
+	                }
+	            }, function(start, end, label) {
+	                $('#publish_time').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD')); 
+	                $('#publish_stime').val(start); 
+	                $('#publish_etime').val(end); 
+	            });
+		  </script>
+		  <!-- <!--   //通讯录 -->
+		   <script type="text/javascript">
+
+		   		
+//图片上传回调函数
+		   		
+
+//标签js
+function spite_key(){
+	//console.log("1212");
+	var tags = $("#form-field-tags").val();
+	var tags_typeid = $("#form-field-typeid").val();
+	
+	if(tags&&tags_typeid){
+		var tagss=tags.split(",");
+		var tagss_typeid=tags_typeid.split(",");
+		
+		//构建数组
+		var tagaa_array = new Array();
+		   /* $.each(tagss, function( k, v ) {
+			   tagaa_array[k] = v;
+			} );  */
+	  	 for(var i in tagss){
+	  		tagaa_array[i] = [tagss[i],tagss_typeid[i]];
+			 //console.log(i);
+		 }  
+
+	    //tagss.pop();
+	    $.each(tagaa_array, function(){
+	    	 $("#form-field-tags").before("<span data-typeid='"+this[1]+"' class='tag label label-info'>" + this[0] + "<span data-role='remove' class='tag_close'></span></span>"); //添加标签
+	 });
+	}
+}
+spite_key();
+function triggle_key(){
+	var tags = "";
+	var test = "";
+    $("#tags").children(".tag").each(function() {
+    	tag_key=$(this).text().replace(/×/, "1");
+        tags += tag_key + ",";
+    })
+    $("#tags").children(".tag").each(function() {
+    	tag_typeid=$(this).attr('data-typeid');
+    	test += tag_typeid + ",";
+    })
+    $("#form-field-tags").val(tags);
+    $("#form-field-typeid").val(test);
+}
+function addTag(tag,tag_typeid) {
+        //var tag = obj.val();
+    var length = $("span.tag").length;
+    if (length > 4) {
+    	layer.alert('标签个数不能超过5个！', {icon: 2});
+
+        return false;
+    }
+    if (tag != '') {
+        var i = 0;
+        $(".tag").each(function() {
+
+            if ($(this).text() == tag) {
+            	layer.msg('不能重复添加！',{icon: 2});
+
+                i++;
+
+            }
+        })
+        $(".tags_enter").val('');
+        if (i > 0) { //说明有重复
+            return false;
+        }
+        if (tag.length > 10) {
+        	layer.alert('标签长度不能大于10个字符！', {icon: 2});
+
+            return false;
+        }
+        $("#form-field-tags").before("<span data-typeid='"+tag_typeid+"' class='tag label label-info'>" + tag + "<span data-role='remove' class='tag_close'></span></span>"); //添加标签
+
+
+    }
+    triggle_key();
+}
+
+$(function() {
+    /*******标签tag******/
+    $(".tags_enter").blur(function() { //焦点失去触发
+        addTag($(this).val());
+        $(this).parents(".tags").css({"border-color": "#d5d5d5"})
+    }).keydown(function(event) {
+        var key_code = event.keyCode;
+        if (key_code == 13) { //enter
+            addTag($(this).val());
+        }
+    });
+    $("#tags").on("click",".tag_close", function() {
+        $(this).parent(".tag").remove();
+        triggle_key();
+    });
+    $(".tags").click(function() {
+        $(".tags_enter").focus();
+        $(this).css({"border-color": "#91b8d0"})
+    }).blur(function() {
+        $(this).css({"border-color": "#d5d5d5"})
+    })
+
+
+    /*******添加推荐标签******/
+    $("#js-tags").children(".list-tag").click(function() {
+        var tag = $(this).text();
+        tags += tag + ",";
+        //添加typeid   form-field-typeid;
+        var tag_typeid = $(this).attr('data-id');              
+        addTag(tag,tag_typeid);
+    })
+})
+
+
+		  </script>
+<script type="text/javascript">
+		function call_back_img(fileurl_tmp){
+ 		        $("#original_img").val(fileurl_tmp);
+ 		    	$("#original_img2").attr('href', fileurl_tmp);
+ 		    	 $(".img_thb").attr('src', fileurl_tmp);
+ 		    	$(".img_thb").attr('style', "display:inline;");
+ 		    	$(".span_thb").attr('style', "display:none;");
+ 		    }
+ 		    function getbimg(o){
+			  var img_src = o.src;
+			  var str = '<img width="400px" src="' + img_src + '">';
+			layer.tips(str,o,{tips: [1, '#fff'], time:4000});
+		  }
+</script>
+	</body>
+</html>

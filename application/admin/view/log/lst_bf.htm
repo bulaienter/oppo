@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+    <title>ThinkPHP5.0</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+
+</head>
+<body>
+	<!-- 头部 -->
+	{include file="public/top" /}
+	<!-- /头部 -->
+
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="public/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">系统</a>
+                    </li>
+                                        <li class="active">版本管理</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+
+						<!-- <button type="button" tooltip="添加栏目" class="btn btn-sm btn-azure btn-addon"
+							style="float:left;margin-left:2px;margin-bottom:2px;"
+								onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i>添加广告
+						</button> -->
+
+			<div class="row">
+			    <div class="col-lg-10 col-sm-10 col-xs-10">
+			        <div class="widget">
+								<div class="widget-header bordered-bottom bordered-green">
+                                    <span class="widget-caption">日志管理</span>
+                                    <div class="widget-buttons">
+                                        <a href="#" data-toggle="maximize">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                        <a href="#" data-toggle="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                        <a href="#" data-toggle="dispose">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+			            <div class="widget-body">
+			                <div class="well  with-footer" style="padding-bottom: 10px;">
+			   操作日志列表
+                                </div>
+                                <table class="table table-bordered table-hover">
+                                    <thead class="">
+                                <tr>
+                                	<th class="text-center" width="7%">
+										<label style="height:15px;">
+                                            <input type="checkbox"  name="" id="check">
+                                            <span class="text"></span>
+										</label>
+                                    </th>
+
+
+									<th width="50"><span>ID</span></th>
+									<th width="100"><span>1212用户ID</span></th>
+									<th width="100"><span>操作用户</span></th>
+									<th><span>描述</span></th>
+									<th width="100"><span>操作IP</span></th>
+									<th><span>地址</span></th>
+	                                <th width="100"><span>状态</span></th>
+	                                <th width="150"><span>操作时间</span></th>
+	                                <th width="80"><span>操作</span></th>
+                                </tr>
+                            </thead>
+                               <tbody>
+                                {volist name="lists" id="lists"}
+	                                 <tr >
+	                             <td>
+                                    <div class="icheckbox_square-green diychk" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;" name="ck" ids="{$lists.log_id}" value="true"><ins class="iCheck-helper"></ins></div>
+                                </td>
+                                <td>{$lists.log_id}</td>
+                                <td>{$lists.admin_id}</td>
+                                <td>{$lists.admin_name}</td>
+                                <td>{$lists.description}</td>
+                                <td>{$lists.ip}</td>
+                                <td>{$lists.status}</td>
+                                <td>
+                                </td>
+                                <td>{$lists.add_time}</td>
+                                <td>
+                                    <a class="btn do-action" data-type="doDelOne" data-href="{:url('dellog')}" data-id="{{d[i].log_id}}">删除</a>
+                                </td>
+                                    </tr>
+                                {/volist}
+                              </tbody>
+                               		 </table>
+                                <div>
+
+	                        <input class="btn btn-azure  active" style="display:inline;margin-left:15px;margin-top:15px;"
+	                         type="button" value="添加版本" onClick="javascript:window.location.href = '{:url('add')}'">
+											<div style="padding-top:10px;float:right;margin-right:10px;">
+
+							                </div>
+
+                        </div>
+                            </div>
+
+                <div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>
+	</div>
+
+	    <!--Basic Scripts-->
+
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+    <!--layer-->
+    <script src="__ADMIN__/plus/layer/layer.js"></script>
+
+	<script type="text/javascript">
+    $("#check").click(function(){
+        if($("#check").prop("checked"))
+        {
+            $(".check").prop("checked","true")
+        }else
+        {
+            $(".check").removeAttr("checked")
+        }
+    })
+
+		function change_isforce(obj){
+			var value_isforce = obj.attr("data-value");
+			var id_isforce= obj.attr("data-id");
+			console.log(id_isforce);
+			var controller='__URLSITE__/index.php/admin/';
+			 $.post(controller+'Ajax/change_isforce', {
+				 value_isforce: value_isforce,
+				 id_isforce:id_isforce
+		     },
+		     function(data) {
+		         if (data == 1) {
+		        	 var src="__ADMIN__/images/yes.png";
+		        	 $(obj).attr('src',src);
+		        	 $(obj).attr('data-value','1');
+		        	 layer.msg('修改状态成功！',{icon: 1});
+
+		         } else {
+		        	 var src="__ADMIN__/images/cancel.png";
+		        	 $(obj).attr('src',src);
+		        	 $(obj).attr('data-value','0');
+		        	 layer.msg('修改状态成功！',{icon: 1});
+		         }
+		     })
+		}
+		function change_status(obj){
+	        	var value_status = obj.attr("data-value");
+	        	var id_status= obj.attr("data-id");
+	        	console.log(id_status);
+	        	var controller='__URLSITE__/index.php/admin/';
+				 $.post(controller+'Ajax/change_status', {
+					 value_status: value_status,
+					 id_status:id_status
+			     },
+			     function(data) {
+			         if (data == 1) {
+			        	 var src="__ADMIN__/images/yes.png";
+			        	 $(obj).attr('src',src);
+			        	 $(obj).attr('data-value','1');
+			        	 layer.msg('修改状态成功！',{icon: 1});
+
+			         } else {
+			        	 var src="__ADMIN__/images/cancel.png";
+			        	 $(obj).attr('src',src);
+			        	 $(obj).attr('data-value','0');
+			        	 layer.msg('修改状态成功！',{icon: 1});
+			         }
+			     })
+	        }
+     function change_sort(obj){
+	        	var value_sort = obj.val();
+	        	var id_sort = obj.attr("data-id");
+
+	        	 $.ajax({
+	              	type : "POST",
+	      			url:'changesort',
+	      			data: {id:id_sort,sort:value_sort},
+	      			success: function(v){
+	      				if(v==1){
+	      					layer.msg('更新成功', {icon: 1});
+	      					setTimeout("location.reload()",1000);
+	      					}
+	      				else{
+	      					layer.msg('更新失败', {icon: 2});
+	      					}
+
+					}
+
+	      		});
+	        }
+    function pdel(){
+
+    	var obj = document.getElementsByClassName("check");
+    	var check_val = new Array();
+    	for(k in obj){
+            if(obj[k].checked)
+                check_val.push(obj[k].value);
+        }
+    	check_val = check_val.join(",");
+    	if(!check_val){
+    		layer.alert('没有选中项', {icon: 2});
+    		return false;
+    	}
+    	console.log(check_val);
+    	layer.confirm('确定删除选中项吗?', {icon: 3, title:'温馨提示'}, function(index){
+            	layer.close(index);
+    	 $.ajax({
+         	type : "POST",
+ 			url:'pdel',
+ 			data: {pid:check_val},
+ 			success: function(v){
+	    				if (v == 1){
+	    					layer.msg('批量删除成功！',{icon: 1});
+	    					setTimeout("location.reload()",1000);}
+
+	    				else{layer.msg('删除失败！',{icon: 2});}
+				}
+ 		});
+      });
+	}
+</script>
+
+
+</body></html>

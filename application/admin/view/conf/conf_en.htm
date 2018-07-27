@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>ThinkPHP5.0</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+</head>
+<body>
+	<!-- 头部 -->
+	{include file="public/top" /}
+	<!-- /头部 -->
+
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="public/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <i class="fa fa-home"></i>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li class="active">配置管理</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+
+<button type="button" tooltip="添加配置" class="btn btn-sm btn-azure btn-addon">英文配置
+</button>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                <div class="flip-scroll">
+                    <form action="" method="post">
+                        <table class="table table-bordered table-hover">
+                            <thead class="">
+                                <tr>
+                                    <th class="text-right" width="10%">配置名称</th>
+                                    <th class="text-left">内容</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">公司名称(英文)</td>
+                                     <td align="left">
+                                         <input name="cp_name_en"  id="cp_name_en" type="text" class="form-control" style="width:420px;" value="{$confres.cp_name_en}">
+                                         
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">创始人(英文)</td>
+                                     <td align="left">
+                                         <input name="cp_founder_en"  id="cp_founder_en" type="text" class="form-control" style="width:320px;" value="{$confres.cp_founder_en}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">联合创始人(英文)</td>
+                                     <td align="left">
+                                         <input name="cp_alliance_en"  id="cp_alliance_en" type="text" class="form-control" style="width:220px;" value="{$confres.cp_alliance_en}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">董事长(英文)</td>
+                                     <td align="left">
+                                         <input name="cp_Chairman_en"  id="cp_Chairman_en" type="text" class="form-control" style="width:520px;" value="{$confres.cp_Chairman_en}">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">总经理(英文)</td>
+                                     <td align="left" style="padding-right:0">
+                                         <input name="cp_manager_en"  id="cp_manager_en" type="text" class="form-control" style="width:420px;display:inline-block" value="{$confres.cp_manager_en}">
+                                     	 <div style="color:green;margin:5px;display:inline-block;"><span>如有多人,请用逗号分隔</span></div>
+                                     </td>
+                                 </tr>
+                                 
+                                 
+                                 
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">备案号</td>
+                                     <td align="left">
+                                         <input name="cp_icp" type="text" class="form-control" style="width:420px;" value="{$confres.cp_icp}">
+                                     </td>
+                                 </tr>
+                                  <tr>
+                                     <td align="right" style="vertical-align:middle;">地址(英文)</td>
+                                     <td align="left">
+                                         <input name="cp_address_en" id="cp_address_en" type="text" class="form-control" style="width:620px;display:inline-block" value="{$confres.cp_address_en}">
+                                    	 <div style="color:green;margin:5px;display:inline-block;"><span>如有多个地址,请用逗号分隔</span></div>
+                                     </td>
+                                     
+                                 </tr>
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">地图(英文)</td>
+                                     <td align="left">
+                                        <input type="button" value="上传地图"  style="margin-right:40px;" class="btn btn-danger shiny"
+										 	onclick="GetUploadify(1,'original_img','conf_mapen','call_back_img');"/>
+                                       	<input type="hidden" class="input-sm original_img"
+                                       		name="cp_map_en" id="original_img" value="{$confres.cp_map_en}" onchange="changesrc(this.value)" />
+  										{if condition="$confres['cp_map_en'] neq null"}
+             							<a target='_blank' href='{$confres.cp_map_en}' id='original_img2'>
+                                        <img width='100'  class='img_thb'  src='{$confres.cp_map_en}' ></a>
+	                                    {else /}
+	                                    <span class="span_thb">暂无图片！</span><a target='_blank' href='$ad' id='original_img2'>
+                                        <img width='25'  class='img_thb' height='25' src='$ad' style="display:none;"></a>
+										{/if}
+										 <span id="err_original_img" style="color:#F00; display:none;"></span>
+                                     </td>
+                                 </tr>
+                                 
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">首页banner简介(英文)</td>
+                                     <td align="left">
+                                     	<textarea rows="4" name="cp_banner_desc_en" class="form-control" id="cp_banner_desc_en" style="width:450px;">{$confres.cp_banner_desc_en}</textarea>
+                                     </td>
+                                 </tr>
+                                  <tr>
+                                     <td align="right" style="vertical-align:middle;">首页公司简介(英文)</td>
+                                     <td align="left">
+                                     	<textarea rows="5" name="cp_desc_en" class="form-control" id="cp_desc_en" style="width:620px;">{$confres.cp_desc_en}</textarea>
+                                     </td>
+                                 </tr>
+                                
+                                 
+                                 
+                                 
+                                
+                                 <tr>
+                                     <td align="right" style="vertical-align:middle;">公司详情(英文)</td>
+                                     <td align="left">
+                                     	
+                                     	<textarea id="content_en" name="cp_content_en">{$confres.cp_content_en}</textarea>
+                                     </td>
+                                 </tr>
+                            </tbody>
+                        </table>
+                        <div  align="left"><input class="btn btn-primary btn-sm shiny" style="margin-left:20%; margin-top:10px;" type="submit" value="提交修改" ></div>
+                    </form>
+                </div>
+                <div>
+                	                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>
+	</div>
+
+	    <!--Basic Scripts-->
+
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+    <script src="__ADMIN__/style/avatar/global.js" type="text/javascript"></script>
+    <script src="__ADMIN__/ueditor/ueditor.config.js"></script>
+    <script src="__ADMIN__/ueditor/ueditor.all.min.js"></script>
+     <script type="text/javascript">
+	    UE.getEditor('content_en',{initialFrameWidth:720,initialFrameHeight:400,});
+    </script>
+     <!-- baidu -->
+    
+<script type="text/javascript">
+ 					function call_back_img(fileurl_tmp){
+
+		   		        $("#original_img").val(fileurl_tmp);
+		   		    	$("#original_img2").attr('href', fileurl_tmp);
+		   		    	 $(".img_thb").attr('src', fileurl_tmp);
+		   		    	$(".img_thb").attr('style', "display:inline;");
+		   		    	$(".span_thb").attr('style', "display:none;");		   		    	
+		   		    	$(".span_qrcode").attr('style', "display:none;");
+		   		    }
+ 					
+		  </script>
+
+
+</body></html>

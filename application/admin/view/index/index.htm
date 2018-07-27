@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html><head>
+	    <meta charset="utf-8">
+    <title>ThinkPHP5.0</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+	<link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+    <!-- <!-- table -->
+	<link href="__ADMIN__/style/dataTables.bootstrap.css" rel="stylesheet">
+
+
+</head>
+<body>
+	<!-- 头部 -->
+    {include file="public/top" /}
+	<!-- /头部 -->
+
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			<!-- Page Sidebar -->
+            {include file="public/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                     <li>
+                        <i class="fa fa-home"></i>
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                                        <li class="active">系统首页</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+				<div class="page-header position-relative ">
+                    <div class="header-title">
+                        <h1>
+                            控制面板
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- Page Body -->
+			<div class="page-body">
+				
+						
+						
+                        
+                        <div>
+<div class="row col-lg-12 col-sm-10 col-xs-10" >
+
+			            
+
+</div>
+                        <div class="row" style="margin:0 auto;">
+                                <div class="col-lg-11">
+                                    <div class="widget">
+                                        <div class="widget-header bordered-bottom bordered-themesecondary">
+                                            <i class="widget-icon fa fa-tags themesecondary"></i>
+                                            <span class="widget-caption themesecondary">系统信息</span>
+                                        </div><!--Widget Header-->
+                                        <div class="widget-body">
+                                            <div class="widget-main no-padding">
+                                                <div class="tickets-container">
+                                                    <ul class="tickets-list">
+                                                        <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">当前域名</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$systeminfo['domain']}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">ThinkPHP框架版本</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$systeminfo['THINK_VERSION']}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">服务器操作系统</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$systeminfo['SERVER_SOFTWARE']}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                         <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">运行环境</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$systeminfo['PHP_OS']}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">Mysql版本</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$systeminfo['mysql']['version']}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">会员IP地址</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$Think.session.ip}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="ticket-item">
+                                                            <div class="row">
+                                                                <div class="ticket-user col-lg-3 col-sm-12">
+
+                                                                    <span class="user-name">登录位置</span>
+                                                                    
+                                                                </div>
+                                                                <div class="ticket-time  col-lg-6 col-sm-6 col-xs-12">
+                                                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span class="time">{$Think.session.address}</span>
+                                                                </div>
+                                                                <div class="ticket-type  col-lg-2 col-sm-6 col-xs-12">
+                                                                    <span class="divider hidden-xs"></span>
+                                                                    <span class="type">正常运行</span>
+                                                                </div>
+                                                                <div class="ticket-state bg-palegreen">
+                                                                    <i class="fa fa-check"></i>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    
+					</div>
+				</div>
+			</div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>
+	</div>
+
+	    <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+	<!-- <!-- table -->
+	<script src="__ADMIN__/style/datatable/jquery.dataTables.min.js"></script>
+    <script src="__ADMIN__/style/datatable/ZeroClipboard.js"></script>
+    <script src="__ADMIN__/style/datatable/dataTables.tableTools.min.js"></script>
+    <script src="__ADMIN__/style/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="__ADMIN__/style/datatable/datatables-init.js"></script>
+ 	<script src="__ADMIN__/plus/layer/layer.js"></script>
+	<script>
+
+	 InitiateSearchableDataTable.init();
+
+
+
+
+    </script>
+ 	<script type="text/javascript">
+		function test_input(v){
+			$("#search_browser").val(v.value);
+			$("#search_browser").keyup();
+
+		}
+		
+		
+ 	</script>
+
+
+
+
+
+</body></html>
